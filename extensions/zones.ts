@@ -93,17 +93,3 @@ export class ZoneClassifier {
     }
   }
 }
-
-export function shouldBlock(zone: Zone, tier: number): boolean {
-  switch (zone) {
-    case Zone.GREEN:
-    case Zone.YELLOW:
-      return false;
-    case Zone.ORANGE:
-      return tier >= 3;
-    case Zone.RED:
-      return true;
-    default:
-      return false;
-  }
-}

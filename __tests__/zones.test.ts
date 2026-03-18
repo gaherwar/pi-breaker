@@ -1,6 +1,6 @@
 // __tests__/zones.test.ts
 import { describe, it, expect, beforeEach } from "vitest";
-import { ZoneClassifier, Zone, POLL_INTERVALS, shouldBlock } from "../extensions/zones";
+import { ZoneClassifier, Zone, POLL_INTERVALS } from "../extensions/zones";
 import type { SystemSignals } from "../extensions/signals";
 
 function makeSignals(overrides: Partial<SystemSignals> = {}): SystemSignals {
@@ -145,38 +145,4 @@ describe("POLL_INTERVALS", () => {
   });
 });
 
-describe("shouldBlock", () => {
-  it("GREEN + tier 3 → pass", () => {
-    expect(shouldBlock(Zone.GREEN, 3)).toBe(false);
-  });
-  it("YELLOW + tier 3 → pass", () => {
-    expect(shouldBlock(Zone.YELLOW, 3)).toBe(false);
-  });
-  it("ORANGE + tier 0 → pass", () => {
-    expect(shouldBlock(Zone.ORANGE, 0)).toBe(false);
-  });
-  it("ORANGE + tier 1 → pass", () => {
-    expect(shouldBlock(Zone.ORANGE, 1)).toBe(false);
-  });
-  it("ORANGE + tier 2 → pass", () => {
-    expect(shouldBlock(Zone.ORANGE, 2)).toBe(false);
-  });
-  it("ORANGE + tier 3 → BLOCK", () => {
-    expect(shouldBlock(Zone.ORANGE, 3)).toBe(true);
-  });
-  it("ORANGE + tier 4 → BLOCK", () => {
-    expect(shouldBlock(Zone.ORANGE, 4)).toBe(true);
-  });
-  it("RED + tier 0 → BLOCK", () => {
-    expect(shouldBlock(Zone.RED, 0)).toBe(true);
-  });
-  it("RED + tier 1 → BLOCK", () => {
-    expect(shouldBlock(Zone.RED, 1)).toBe(true);
-  });
-  it("RED + tier 2 → BLOCK", () => {
-    expect(shouldBlock(Zone.RED, 2)).toBe(true);
-  });
-  it("RED + tier 3 → BLOCK", () => {
-    expect(shouldBlock(Zone.RED, 3)).toBe(true);
-  });
-});
+

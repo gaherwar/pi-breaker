@@ -1,8 +1,8 @@
 # pi-deadman
 
-Dead man's switch for AI coding agents.
+Protecting that critical 10% of your memory.
 
-Monitors macOS memory pressure, gates heavy operations, and auto-kills runaway processes before your system locks up.
+Dead man's switch for AI coding agents. Install it, forget it. When your system runs out of memory, it steps in automatically.
 
 ## Install
 
@@ -10,23 +10,23 @@ Monitors macOS memory pressure, gates heavy operations, and auto-kills runaway p
 pi install npm:pi-deadman
 ```
 
-On first run, it calibrates a baseline for your machine (~10 seconds). After that, it runs in the background — no configuration needed.
+On first run, it calibrates a baseline for your machine (~10 seconds). After that, it runs silently in the background.
 
 **macOS only.** Silent no-op on other platforms.
 
 ## How It Works
 
-**Zones** — Polls system health and classifies into GREEN, YELLOW, ORANGE, or RED based on memory pressure signals.
+**Monitor** — Polls system health in the background. Classifies into GREEN, YELLOW, ORANGE, or RED.
 
-**Gate** — Every `bash` tool call is checked against the current zone. Light commands always pass; heavy operations (builds, installs, docker) are blocked in ORANGE and RED.
+**Watchdog** — In confirmed RED, automatically kills the process most likely causing the pressure. No prompts, no questions.
 
-**Watchdog** — In confirmed RED, automatically identifies and kills the process most likely causing the pressure. Runs independently so it works even when the system is thrashing.
+**Notification** — After a kill, you see a one-line message telling you what was killed and why. That's the only time you'll know it's there.
 
 ## Commands
 
 | Command | Description |
 |---|---|
-| `/deadman` | Show current zone and memory stats |
+| `/deadman` | Crashes prevented since install |
 
 ## Security & System Calls
 
@@ -50,13 +50,13 @@ pi-deadman makes **no network requests** and reads **no environment variables**.
 | Signal | File | Trigger |
 |---|---|---|
 | `SIGKILL` | monitor.ts | Watchdog auto-kill in confirmed RED zone |
-| `SIGTERM` | processes.ts | User-initiated kill from interactive menu |
 
 **Filesystem writes** (scoped to `~/.pi/deadman/` only):
 | What | File | Purpose |
 |---|---|---|
 | `~/.pi/deadman/baseline.json` | calibration.ts | Persisted canary baseline |
-| `~/.pi/deadman/logs/*.jsonl` | logging.ts | Structured decision/system logs (auto-GC after 3 days) |
+| `~/.pi/deadman/stats.json` | index.ts | Kill counter (crashes prevented) |
+| `~/.pi/deadman/logs/*.jsonl` | logging.ts | Structured logs (auto-GC after 3 days) |
 
 ## Development
 
