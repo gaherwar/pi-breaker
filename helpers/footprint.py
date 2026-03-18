@@ -6,12 +6,12 @@ Sorted by footprint_mb descending. Top 20 processes by RSS checked for real foot
 No root required.
 """
 import ctypes
-import ctypes.util
 import json
 import subprocess
 import os
 
-libc = ctypes.CDLL(ctypes.util.find_library("c"))
+# Load libc directly — macOS always has it at this path
+libc = ctypes.CDLL("/usr/lib/libc.dylib")
 
 # rusage_info_v2 has many fields. We allocate a buffer large enough (1024 bytes)
 # and read ri_phys_footprint at its known offset (byte 64, uint64).

@@ -11,13 +11,13 @@ Each response is one JSON line terminated by \n.
 Stays alive for the entire session. Spawned once at session_start.
 """
 import ctypes
-import ctypes.util
 import json
 import os
 import subprocess
 import sys
 
-libc = ctypes.CDLL(ctypes.util.find_library("c"))
+# Load libc directly — macOS always has it at this path
+libc = ctypes.CDLL("/usr/lib/libc.dylib")
 
 RUSAGE_BUF_SIZE = 1024
 PHYS_FOOTPRINT_OFFSET = 72  # byte offset of ri_phys_footprint in rusage_info_v2
