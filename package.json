@@ -1,6 +1,6 @@
 {
   "name": "pi-deadman",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Protecting that critical 10% of your memory.",
   "type": "module",
   "keywords": [
@@ -28,5 +28,14 @@
   "os": [
     "darwin"
   ],
+  "author": "gaherwar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaherwar/pi-deadman.git"
+  },
+  "homepage": "https://github.com/gaherwar/pi-deadman#readme",
+  "bugs": {
+    "url": "https://github.com/gaherwar/pi-deadman/issues"
+  },
   "license": "MIT"
 }
