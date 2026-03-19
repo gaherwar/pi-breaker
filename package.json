@@ -1,6 +1,6 @@
 {
   "name": "pi-breaker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Prevents macOS freezes during pi sessions. Auto-kills runaway processes when memory runs out.",
   "type": "module",
   "keywords": [

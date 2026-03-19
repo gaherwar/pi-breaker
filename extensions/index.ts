@@ -77,9 +77,9 @@ export default function (pi: any) {
     // Register auto-kill notification — friendly, no emoji
     monitor.onAutoKill((decision: any) => {
       const names = decision.targets.map((t: any) => `${t.name} (${t.footprint_mb} MB)`).join(", ");
-      const updatedStats = incrementKills(decision.targets.length);
+      incrementKills(decision.targets.length);
       ctx.ui.notify(
-        `pi-breaker killed ${names} for overstepping memory consumption. (${updatedStats.kills_total} crashes prevented so far)`,
+        `🛡️ Breaker stepped in to kill ${names} for overconsumption.`,
         "warning",
       );
     });
